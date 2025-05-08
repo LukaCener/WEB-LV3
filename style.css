@@ -71,10 +71,10 @@ aside {
     display: flex;
     align-items: center; 
     flex-wrap: wrap;
-    margin-left: 10%;
+    margin-left: 5px;
 }
 
-#filters select, #filters input, #filters button {
+#filters select, #filters input {
     margin: 5px;
     padding: 10px;
     font-size: 15px;
@@ -82,12 +82,23 @@ aside {
     border: 1px solid black;
 }
 
-#filters select, #filter-temp-min, #filter-temp-max {
-    width: 150px;
+#filters select, #filter-temp-min, #filter-temp-max, #filter-wind-min, #filter-wind-max {
     text-align: center;
 }
 
-.button-add, .button-remove, #confirm-filters, #confirm-plan {
+#filters #filter-season{
+    width: 100px;
+}
+
+#filters #filter-weather-type{
+    width: 135px;
+}
+
+#filter-temp-min, #filter-temp-max, #filter-wind-min, #filter-wind-max{
+    width: 133px;
+}
+
+.button-add, .button-remove, #confirm-plan {
     margin: 10px 23px;
     color: white;
     border: none;
@@ -95,6 +106,15 @@ aside {
     max-width: 100px;
     border-radius: 10px;
     font-size: 15px;
+}
+
+#confirm-filters, #reset-filters{
+    color: white;
+    border: none;
+    margin: 5px;
+    padding: 10px;
+    font-size: 15px;
+    border-radius: 10px;
 }
 
 .button-remove{
@@ -105,7 +125,7 @@ aside {
     background-color: blue; 
 }
 
-.button-remove {
+.button-remove, #reset-filters {
     background-color: red; 
 }
 

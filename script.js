@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
     loadWeatherData();
 
     document.querySelector('#confirm-filters').addEventListener('click', showFilteredTable);
+    document.querySelector('#reset-filters').addEventListener('click', resetFilters);
     document.querySelector('#confirm-plan').addEventListener('click', confirmPlan);
 
     updatePlanVisibility();
@@ -49,7 +50,11 @@ function showTable(weatherData) {
     tbody.innerHTML = ''; 
     
     for (const data of weatherData) {
+        const isInPlan = plan.includes(data.id);
+        const buttonText = isInPlan ? "Remove" : "Add";
+        const buttonClass = isInPlan ? "button-remove" : "button-add";
         const row = document.createElement('tr');
+
         row.innerHTML = `
             <td>${data.id}</td>
             <td>${data.temperature}</td>
@@ -63,27 +68,42 @@ function showTable(weatherData) {
             <td>${data.visibility}</td>
             <td>${data.location}</td>
             <td>${data.weather_type}</td>
-            <td><button class="button-add" onClick="toggleAddToPlan('${data.id}', this)">Add</button></td>
+            <td><button class="${buttonClass}" onClick="toggleAddToPlan('${data.id}', this)">${buttonText}</button></td>
         `;
         tbody.appendChild(row);
     }
 }
 
 function showFilteredTable() {
+    const selectedSeason = document.querySelector('#filter-season').value;
+    const selectedWeather = document.querySelector('#filter-weather-type').value;
     const minTemp = parseFloat(document.querySelector('#filter-temp-min').value) || -Infinity;
     const maxTemp = parseFloat(document.querySelector('#filter-temp-max').value) || Infinity;
-    const selectedSeason = document.querySelector('#filter-season').value;
-    const selectedWeather = document.querySelector('#filter-weather').value;
+    const minWindSpeed = parseFloat(document.querySelector('#filter-wind-min').value) || -Infinity;
+    const maxWindSpeed = parseFloat(document.querySelector('#filter-wind-max').value) || Infinity;
     const filteredData = window.weatherData.filter(data => {
         const seasonMatches = selectedSeason ? data.season === selectedSeason : true;
         const weatherMatches = selectedWeather ? data.weather_type === selectedWeather : true;
         const tempMatches = data.temperature >= minTemp && data.temperature <= maxTemp;
+        const windSpeedMatches = data.wind_speed >= minWindSpeed && data.wind_speed <= maxWindSpeed;
 
-        return seasonMatches && weatherMatches && tempMatches;
+        return seasonMatches && weatherMatches && tempMatches && windSpeedMatches;
     });
 
     showTable(filteredData.slice(0, 20));
 }
+
+function resetFilters() {
+    document.querySelector('#filter-season').selectedIndex = 0;
+    document.querySelector('#filter-weather-type').selectedIndex = 0;
+    document.querySelector('#filter-temp-min').value = '';
+    document.querySelector('#filter-temp-max').value = '';
+    document.querySelector('#filter-wind-min').value = '';
+    document.querySelector('#filter-wind-max').value = '';
+
+    showTable(window.weatherData);
+}
+
 
 function toggleAddToPlan(dataID, button) {
     const isInPlan = plan.includes(dataID);
