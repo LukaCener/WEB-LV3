@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+	<html lang="hr">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="Free Web tutorials">
+		<meta name="keywords" content="HTML, CSS">
+		<meta name="author" content="Luka Cener">
+		<link rel="stylesheet" href="style.css">
+		<title>Web LV3 - Weather App</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+	</head>
+
+	<body>
+
+		<header>
+			<h1>Weather APP</h1>
+		</header>
+
+        <div class="data">
+            <div class="weather-data">
+                <h2>Weather Data</h2>
+                <table>
+                    <tr>
+                        <th>Date (ID)</th>
+                        <th>Temperature (°C)</th>
+                        <th>Humidity (%)</th>
+                        <th>Wind Speed (km/h)</th>
+                        <th>Precipitation (%)</th>
+                        <th>Cloud Cover</th>
+                        <th>Atmospheric Pressure</th>
+                        <th>UV Index</th>
+                        <th>Season</th>
+                        <th>Visibility (km)</th>
+                        <th>Location</th>
+                        <th>Weather Type</th>
+                    </tr>
+                    <tbody id="weather-table"></tbody>
+                </table>
+            </div>
+
+			<aside>
+				<h2>Plan</h2>
+				<table>
+					<tr>
+						<th>ID</th>
+						<th>Temperature (°C)</th>
+						<th>Season</th>
+						<th>Weather Type</th>
+					</tr>
+					<tbody id="plan-table"></tbody>
+				</table>
+				<button id="confirm-plan">Confirm Plan</button>
+			</aside>
+		</div>
+
+        <section>
+			<div id="filters">
+				<select id="filter-season">
+				<option value="">Season</option>
+				<option value="Spring">Spring</option>
+				<option value="Summer">Summer</option>
+				<option value="Winter">Winter</option>
+				<option value="Autumn">Autumn</option>
+				</select>
+								
+				<select id="filter-weather">
+				<option value="">Weather Type</option>
+				<option value="Sunny">Sunny</option>
+				<option value="Cloudy">Cloudy</option>
+				<option value="Rainy">Rainy</option>
+				</select>
+
+				<input type="number" id="filter-temp-min" placeholder="Min Temperature">
+				<input type="number" id="filter-temp-max" placeholder="Max Temperature">
+				
+				<button id="confirm-filters">Confirm Filters</button>
+			</div>			
+		</section>
+
+		<footer>
+			<p>&copy; 2025. Web Programiranje. Sva prava pridrzana.</p>
+		</footer>
+
+    <script src="script.js"></script>
+
+	</body>
+</html>
